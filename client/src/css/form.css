@@ -1,0 +1,11 @@
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group .form-control:focus {
+  box-shadow: none;
+}
+
+.submit-btn {
+  background-color: #14808f !important;
+}

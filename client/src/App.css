@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+
+.form-box {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Common CSS */
+.flex-css {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-css-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.flex-css-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex-row-start {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-row-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

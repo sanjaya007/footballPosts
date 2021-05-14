@@ -1,0 +1,16 @@
+.jumbotron {
+  padding: 5px 10px !important;
+  margin: 10px 10px 20px 10px !important;
+  border-radius: 10px !important;
+  background-color: #f1f4f6;
+}
+
+.jumbotron img {
+  height: 70px;
+  margin-right: 1rem !important;
+}
+
+.jumbotron h1 {
+  font-family: "Potta One", cursive;
+  font-size: 1.7rem;
+}
