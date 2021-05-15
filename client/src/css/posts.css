@@ -39,3 +39,17 @@
 .post-box .edit-icon:active {
   transform: scale(0.9);
 }
+
+.post-box .delete-icon:active {
+  color: tomato;
+}
+
+.no-post-box {
+  margin-top: 100px;
+}
+
+.no-post-box h1 {
+  color: #a0a0a0;
+  font-size: 14px;
+  padding: 10px 0;
+}

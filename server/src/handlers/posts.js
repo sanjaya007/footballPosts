@@ -7,7 +7,7 @@ const addPosts = async (req, res) => {
     const result = await post.save();
     res.status(201).json(result);
   } catch (error) {
-    res.status(201).json({
+    res.status(401).json({
       message: error.message,
     });
   }
@@ -18,10 +18,28 @@ const getPosts = async (req, res) => {
     const result = await PostModel.find();
     res.status(201).json(result);
   } catch (error) {
-    res.status(201).json({
+    res.status(401).json({
       message: error.message,
     });
   }
 };
 
-export { addPosts, getPosts };
+const updatePosts = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const updatedPost = await PostModel.findByIdAndUpdate(
+      { _id: id },
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.status(201).json(updatedPost);
+  } catch (error) {
+    res.status(401).json({
+      message: error.message,
+    });
+  }
+};
+
+export { addPosts, getPosts, updatePosts };

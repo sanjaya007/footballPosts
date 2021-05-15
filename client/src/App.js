@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getPosts } from "./redux/actions/posts";
 
 const App = () => {
+  const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,10 +26,10 @@ const App = () => {
               <Col md={12} className="mx-auto">
                 <Row>
                   <Col md={8}>
-                    <PostContainer />
+                    <PostContainer setCurrentId={setCurrentId} />
                   </Col>
                   <Col md={4} className="p-1">
-                    <FormBox />
+                    <FormBox currentId={currentId} />
                   </Col>
                 </Row>
               </Col>

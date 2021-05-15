@@ -1,24 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import FileBase from "react-file-base64";
 import { Button } from "@material-ui/core";
 import "../../css/form.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addPosts } from "../../redux/actions/posts";
+import { updatePosts } from "../../redux/actions/posts";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
-const FormBox = () => {
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const FormBox = ({ currentId }) => {
   const [inputData, setInputData] = useState({
     title: "",
     caption: "",
     tags: "",
     file: "",
   });
+  console.log(inputData);
+
+  const [open, setOpen] = useState(false);
+
+  const posts = useSelector((state) =>
+    currentId ? state.posts.find((post) => post._id === currentId) : null
+  );
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (posts) setInputData(posts);
+  }, [posts]);
+
+  const handleError = () => {
+    setOpen(true);
+  };
+
+  const errorClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const trimmedBody = (obj) => {
+    return Object.keys(obj).reduce((acc, value) => {
+      acc[value] = obj[value].trim();
+      return acc;
+    }, {});
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPosts(inputData));
+
+    if (currentId) {
+      dispatch(updatePosts(currentId, inputData));
+    } else {
+      const trimmedInputData = trimmedBody(inputData);
+
+      for (const keys in trimmedInputData) {
+        if (trimmedInputData[keys] === "") {
+          handleError();
+          return false;
+        }
+      }
+
+      dispatch(addPosts(trimmedInputData));
+    }
   };
 
   const clear = () => {};
@@ -70,16 +120,14 @@ const FormBox = () => {
             className="submit-btn"
             type="submit"
             variant="contained"
-            color="primary"
             size="large"
             fullWidth
           >
-            Submit
+            {currentId ? "Update" : "Post"}
           </Button>
           <Button
             className="clear-btn mt-2"
             variant="contained"
-            color="disabled"
             size="small"
             onClick={clear}
             fullWidth
@@ -87,7 +135,11 @@ const FormBox = () => {
             Clear
           </Button>
         </Form>
-        <div className="my_captcha"></div>
+        <Snackbar open={open} autoHideDuration={2000} onClose={errorClose}>
+          <Alert onClose={errorClose} severity="error">
+            All fields are required !
+          </Alert>
+        </Snackbar>
       </div>
     </>
   );
