@@ -14,6 +14,11 @@
   object-fit: cover;
 }
 
+.post-box .like-details p {
+  font-size: 10px;
+  color: #8e8e8e;
+}
+
 .post-box .caption-title h1 {
   font-size: 1rem;
   font-weight: 600;
@@ -42,6 +47,17 @@
 
 .post-box .delete-icon:active {
   color: tomato;
+}
+
+.post-box .author-details .post-time {
+  font-size: 10px;
+  color: #8e8e8e;
+}
+
+.post-box .author-details .author-name {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Dancing Script", cursive;
 }
 
 .no-post-box {

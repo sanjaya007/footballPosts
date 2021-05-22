@@ -3,16 +3,32 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import moment from "moment";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import { deletePosts } from "../../redux/actions/posts";
 import { useDispatch } from "react-redux";
 
 function PostItem({ info, setCurrentId }) {
   const [like, setLike] = useState(false);
+  const [dialogueOpen, setDialogueOpen] = useState(false);
 
   const dispatch = useDispatch();
 
   const toggleLike = () => {
     setLike(!like);
+  };
+
+  const handleDialogueOpen = () => {
+    setDialogueOpen(true);
+  };
+
+  const handleDialogueClose = () => {
+    setDialogueOpen(false);
   };
 
   const handleTags = (tags) => {
@@ -26,6 +42,8 @@ function PostItem({ info, setCurrentId }) {
     }
     return finalTags;
   };
+
+  console.log(info);
 
   return (
     <>
@@ -57,9 +75,14 @@ function PostItem({ info, setCurrentId }) {
             <div className="icons2">
               <DeleteOutlineIcon
                 className="icon delete-icon"
-                onClick={() => dispatch(deletePosts(info._id))}
+                onClick={handleDialogueOpen}
               />
             </div>
+          </div>
+          <div className="like-details">
+            <p className="m-0">
+              <span className="total-likes"> 7 </span> <span> Likes </span>
+            </p>
           </div>
           <div className="caption-data">
             <div className="caption-title">
@@ -69,10 +92,40 @@ function PostItem({ info, setCurrentId }) {
               <p className="mb-1">{info.caption}</p>
             </div>
             <div className="hash-tags">
-              <p className="mb-2">{handleTags(info.tags)}</p>
+              <p className="mb-0">{handleTags(info.tags)}</p>
             </div>
           </div>
+          <div className="author-details flex-row-sb">
+            <p className="post-time mb-1">{moment(info.createdAt).fromNow()}</p>
+            <p className="author-name mb-1">
+              - <span> Sanjaya Paudel </span>
+            </p>
+          </div>
         </div>
+        <Dialog
+          open={dialogueOpen}
+          onClose={handleDialogueClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Once you delete your post, you cannot undo it !!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => dispatch(deletePosts(info._id))}
+              color="primary"
+            >
+              Yes
+            </Button>
+            <Button onClick={handleDialogueClose} color="primary">
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </>
   );
