@@ -1,4 +1,9 @@
-import { addPostsAPI, getPostsAPI, updatePostsAPI } from "../../api/api";
+import {
+  addPostsAPI,
+  getPostsAPI,
+  updatePostsAPI,
+  deletePostsAPI,
+} from "../../api/api";
 
 const addPosts = (value) => async (dispatch) => {
   try {
@@ -27,4 +32,13 @@ const updatePosts = (id, value) => async (dispatch) => {
   }
 };
 
-export { addPosts, getPosts, updatePosts };
+const deletePosts = (id) => async (dispatch) => {
+  try {
+    const { data } = await deletePostsAPI(id);
+    dispatch({ type: "DELETE_POSTS", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { addPosts, getPosts, updatePosts, deletePosts };

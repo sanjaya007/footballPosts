@@ -3,12 +3,28 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import { deletePosts } from "../../redux/actions/posts";
+import { useDispatch } from "react-redux";
 
 function PostItem({ info, setCurrentId }) {
   const [like, setLike] = useState(false);
 
+  const dispatch = useDispatch();
+
   const toggleLike = () => {
     setLike(!like);
+  };
+
+  const handleTags = (tags) => {
+    const arrTags = tags.split(",");
+
+    let finalTags = "";
+    for (let i = 0; i < arrTags.length; i++) {
+      arrTags[i] = arrTags[i].trim();
+      arrTags[i] = "#" + arrTags[i];
+      finalTags += arrTags[i] + " ";
+    }
+    return finalTags;
   };
 
   return (
@@ -39,7 +55,10 @@ function PostItem({ info, setCurrentId }) {
               />
             </div>
             <div className="icons2">
-              <DeleteOutlineIcon className="icon delete-icon" />
+              <DeleteOutlineIcon
+                className="icon delete-icon"
+                onClick={() => dispatch(deletePosts(info._id))}
+              />
             </div>
           </div>
           <div className="caption-data">
@@ -50,7 +69,7 @@ function PostItem({ info, setCurrentId }) {
               <p className="mb-1">{info.caption}</p>
             </div>
             <div className="hash-tags">
-              <p className="mb-2">{info.tags}</p>
+              <p className="mb-2">{handleTags(info.tags)}</p>
             </div>
           </div>
         </div>

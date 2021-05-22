@@ -42,4 +42,16 @@ const updatePosts = async (req, res) => {
   }
 };
 
-export { addPosts, getPosts, updatePosts };
+const deletePosts = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await PostModel.findByIdAndRemove({ _id: id }, req.body);
+    res.status(201).json(id);
+  } catch (error) {
+    res.status(401).json({
+      message: error.message,
+    });
+  }
+};
+
+export { addPosts, getPosts, updatePosts, deletePosts };

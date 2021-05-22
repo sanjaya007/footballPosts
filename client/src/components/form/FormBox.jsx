@@ -13,20 +13,21 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const FormBox = ({ currentId }) => {
+const FormBox = ({ currentId, setCurrentId }) => {
   const [inputData, setInputData] = useState({
     title: "",
     caption: "",
     tags: "",
     file: "",
   });
-  console.log(inputData);
 
   const [open, setOpen] = useState(false);
 
-  const posts = useSelector((state) =>
-    currentId ? state.posts.find((post) => post._id === currentId) : null
-  );
+  const posts = useSelector((state) => {
+    return currentId
+      ? state.posts.find((post) => post._id === currentId)
+      : null;
+  });
 
   const dispatch = useDispatch();
 
@@ -47,7 +48,7 @@ const FormBox = ({ currentId }) => {
 
   const trimmedBody = (obj) => {
     return Object.keys(obj).reduce((acc, value) => {
-      acc[value] = obj[value].trim();
+      acc[value] = obj[value].toString().trim();
       return acc;
     }, {});
   };
@@ -55,23 +56,33 @@ const FormBox = ({ currentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (currentId) {
-      dispatch(updatePosts(currentId, inputData));
-    } else {
-      const trimmedInputData = trimmedBody(inputData);
+    const trimmedInputData = trimmedBody(inputData);
 
-      for (const keys in trimmedInputData) {
-        if (trimmedInputData[keys] === "") {
-          handleError();
-          return false;
-        }
+    for (const keys in trimmedInputData) {
+      if (trimmedInputData[keys] === "") {
+        handleError();
+        return false;
       }
+    }
 
+    if (currentId) {
+      dispatch(updatePosts(currentId, trimmedInputData));
+      clear();
+    } else {
       dispatch(addPosts(trimmedInputData));
+      clear();
     }
   };
 
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setInputData({
+      title: "",
+      caption: "",
+      tags: "",
+      file: "",
+    });
+  };
 
   return (
     <>

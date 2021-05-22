@@ -6,7 +6,9 @@ import "../../css/posts.css";
 import { useSelector } from "react-redux";
 
 const PostContainer = ({ setCurrentId }) => {
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => {
+    return state.posts;
+  });
   return (
     <Container className="flex-css-column">
       {!posts.length ? (

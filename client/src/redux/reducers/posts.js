@@ -6,6 +6,14 @@ const postsReducer = (state = [], action) => {
     case "GET_POSTS":
       return action.payload;
 
+    case "UPDATE_POSTS":
+      return state.map((data) =>
+        data._id === action.payload._id ? action.payload : data
+      );
+
+    case "DELETE_POSTS":
+      return state.filter((post) => post._id !== action.payload);
+
     default:
       return state;
   }

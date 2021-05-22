@@ -29,7 +29,10 @@ const App = () => {
                     <PostContainer setCurrentId={setCurrentId} />
                   </Col>
                   <Col md={4} className="p-1">
-                    <FormBox currentId={currentId} />
+                    <FormBox
+                      currentId={currentId}
+                      setCurrentId={setCurrentId}
+                    />
                   </Col>
                 </Row>
               </Col>
