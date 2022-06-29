@@ -6,6 +6,18 @@
   box-shadow: none;
 }
 
-.submit-btn {
-  background-color: #14808f !important;
+.form-box {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.submit-btn.green-btn {
+  background-color: #222f3e !important;
+  color: #ffffff !important;
+}
+
+.submit-btn.blue-btn {
+  background-color: #273c75 !important;
+  color: #ffffff !important;
 }

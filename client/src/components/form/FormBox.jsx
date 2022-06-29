@@ -128,7 +128,7 @@ const FormBox = ({ currentId, setCurrentId }) => {
             />
           </Form.Group>
           <Button
-            className="submit-btn"
+            className={`submit-btn ${currentId ? "blue-btn" : "green-btn"}`}
             type="submit"
             variant="contained"
             size="large"

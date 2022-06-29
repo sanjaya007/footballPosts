@@ -1,0 +1,82 @@
+.auth-box {
+  padding-top: 10px !important;
+}
+
+.auth-box .account-box {
+  width: 460px;
+  padding: 50px 30px !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  border-radius: 12px;
+}
+
+.auth-box .account-box .title h1 {
+  text-align: center;
+  font-size: 26px;
+}
+
+.auth-box .account-box .title p {
+  text-align: center;
+  font-size: 14px;
+  color: #979797;
+}
+
+.auth-box .account-box .input-box {
+  margin-bottom: 30px !important;
+}
+
+.auth-box .account-box .input-box label {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth-box .account-box .input-box input {
+  border: none;
+  outline: none;
+  padding: 2px 0 4px 0 !important;
+  border-bottom: 1px solid #97979785;
+  width: 100%;
+}
+
+.auth-box .account-box .btn-container button {
+  border: none;
+  outline: none;
+  background-color: #0e56eb;
+  color: #ffffff;
+  font-weight: 500;
+  width: 100%;
+  padding: 10px !important;
+  border-radius: 6px;
+}
+
+.auth-box .account-box .google-btn {
+  width: 100%;
+  border: 1px solid #979797;
+  border-radius: 6px;
+  padding: 10px !important;
+  cursor: pointer;
+}
+
+.auth-box .account-box .google-btn img {
+  height: 20px;
+}
+
+.auth-box .account-box .google-btn p {
+  margin: 0 !important;
+  margin-left: 10px !important;
+  font-size: 14px;
+}
+
+.auth-box .account-box .note-text p {
+  font-size: 14px;
+  margin: 0 !important;
+}
+
+.auth-box .account-box .note-text span {
+  color: #0e56eb;
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 6px !important;
+  cursor: pointer;
+}

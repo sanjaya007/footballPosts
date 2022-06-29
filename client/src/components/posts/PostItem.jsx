@@ -43,8 +43,6 @@ function PostItem({ info, setCurrentId }) {
     return finalTags;
   };
 
-  console.log(info);
-
   return (
     <>
       <div className="post-box">
@@ -56,7 +54,7 @@ function PostItem({ info, setCurrentId }) {
           />
         </div>
         <div className="image-desc px-2">
-          <div className="actions-btns flex-row-sb py-1">
+          <div className="actions-btns flex-css-row-sb py-1">
             <div className="icons1">
               {!like ? (
                 <FavoriteBorderIcon
@@ -95,7 +93,7 @@ function PostItem({ info, setCurrentId }) {
               <p className="mb-0">{handleTags(info.tags)}</p>
             </div>
           </div>
-          <div className="author-details flex-row-sb">
+          <div className="author-details flex-css-row-sb">
             <p className="post-time mb-1">{moment(info.createdAt).fromNow()}</p>
             <p className="author-name mb-1">
               - <span> Sanjaya Paudel </span>
@@ -116,7 +114,10 @@ function PostItem({ info, setCurrentId }) {
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={() => dispatch(deletePosts(info._id))}
+              onClick={() => {
+                handleDialogueClose();
+                dispatch(deletePosts(info._id));
+              }}
               color="primary"
             >
               Yes

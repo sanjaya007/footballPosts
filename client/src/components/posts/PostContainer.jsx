@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import PostItem from "./PostItem";
 import NoPost from "./NoPost";
 import "../../css/posts.css";
@@ -10,7 +9,7 @@ const PostContainer = ({ setCurrentId }) => {
     return state.posts;
   });
   return (
-    <Container className="flex-css-column">
+    <div className="list-box">
       {!posts.length ? (
         <NoPost />
       ) : (
@@ -18,7 +17,7 @@ const PostContainer = ({ setCurrentId }) => {
           <PostItem key={index} info={val} setCurrentId={setCurrentId} />
         ))
       )}
-    </Container>
+    </div>
   );
 };
 

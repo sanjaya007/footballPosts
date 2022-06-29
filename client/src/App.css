@@ -1,40 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
-
-.form-box {
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+.main-container {
+  padding-top: 20px !important;
+  padding-left: 200px !important;
+  padding-right: 200px !important;
+  transition: all 0.3s ease;
 }
 
-/* Common CSS */
-.flex-css {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main-container .main-box .left-box {
+  width: 100%;
 }
 
-.flex-css-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+.main-container .main-box .right-box {
+  min-width: 330px;
+  max-width: 330px;
+  width: 330px;
+  position: sticky;
+  top: 20px;
+  bottom: 20px;
 }
 
-.flex-css-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+@media (max-width: 1300px) {
+  .main-container {
+    padding-left: 150px !important;
+    padding-right: 150px !important;
+  }
 }
 
-.flex-row-start {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  align-items: center;
+@media (max-width: 1200px) {
+  .main-container {
+    padding-left: 120px !important;
+    padding-right: 120px !important;
+  }
 }
 
-.flex-row-sb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@media (max-width: 1100px) {
+  .main-container {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .main-container {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .main-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .main-container .main-box {
+    flex-direction: column-reverse;
+  }
+  .main-container .main-box .left-box {
+    padding-right: 0 !important;
+  }
+  .main-container .main-box .right-box {
+    min-width: 100%;
+    margin-bottom: 30px !important;
+    display: flex;
+    justify-content: center;
+    position: unset;
+  }
 }
