@@ -19,6 +19,22 @@
   object-fit: cover;
 }
 
+.post-box .image-desc {
+  min-width: 450px;
+  max-width: 450px;
+  width: 100%;
+}
+
+.post-box .image-desc .actions-btns a.download-link {
+  color: #000000;
+}
+
+.post-box .image-desc .actions-btns a.download-link:active {
+  transform: scale(0.85);
+  cursor: progress;
+  color: #2980b9;
+}
+
 .post-box .like-details p {
   font-size: 10px;
   color: #8e8e8e;

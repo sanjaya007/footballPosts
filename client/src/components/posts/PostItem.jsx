@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CreateIcon from "@material-ui/icons/Create";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import DownloadIcon from "@mui/icons-material/Download";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,17 +11,34 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { deletePosts } from "../../redux/actions/posts";
+import { deletePosts, likePosts } from "../../redux/actions/posts";
 import { useDispatch } from "react-redux";
 
 function PostItem({ info, setCurrentId }) {
   const [like, setLike] = useState(false);
   const [dialogueOpen, setDialogueOpen] = useState(false);
-
   const dispatch = useDispatch();
 
-  const toggleLike = () => {
-    setLike(!like);
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  console.log(user);
+  console.log(info);
+
+  const alreadyLiked = info.likes.find(
+    (id) => id === user?.result?.googleId || id === user?.result?._id
+  );
+
+  useEffect(() => {
+    if (alreadyLiked) {
+      setLike(() => true);
+    } else {
+      console.log("dislike");
+      setLike(() => false);
+    }
+  }, [info]);
+
+  const handleLike = (id) => {
+    dispatch(likePosts(id));
   };
 
   const handleDialogueOpen = () => {
@@ -59,27 +77,41 @@ function PostItem({ info, setCurrentId }) {
               {!like ? (
                 <FavoriteBorderIcon
                   className="icon like-icon"
-                  onClick={toggleLike}
+                  onClick={() => handleLike(info._id)}
                 />
               ) : (
-                <FavoriteIcon className="icon like-icon" onClick={toggleLike} />
+                <FavoriteIcon
+                  className="icon like-icon"
+                  onClick={() => handleLike(info._id)}
+                />
               )}
 
-              <CreateIcon
-                className="icon edit-icon"
-                onClick={() => setCurrentId(info._id)}
-              />
+              {info?.creator === user?.result?._id ||
+              info?.creator === user?.result?.googleId ? (
+                <CreateIcon
+                  className="icon edit-icon"
+                  onClick={() => setCurrentId(info._id)}
+                />
+              ) : null}
             </div>
-            <div className="icons2">
-              <DeleteOutlineIcon
-                className="icon delete-icon"
-                onClick={handleDialogueOpen}
-              />
+            <div className="icons2 flex-css-row">
+              <a href={info.file} className="download-link" download>
+                <DownloadIcon />
+              </a>
+
+              {info?.creator === user?.result?._id ||
+              info?.creator === user?.result?.googleId ? (
+                <DeleteOutlineIcon
+                  className="icon delete-icon ms-2"
+                  onClick={handleDialogueOpen}
+                />
+              ) : null}
             </div>
           </div>
           <div className="like-details">
             <p className="m-0">
-              <span className="total-likes"> 7 </span> <span> Likes </span>
+              <span className="total-likes"> {info.likes.length} </span>
+              <span> {info.likes.length > 1 ? "Likes" : "Like"} </span>
             </p>
           </div>
           <div className="caption-data">
@@ -96,7 +128,7 @@ function PostItem({ info, setCurrentId }) {
           <div className="author-details flex-css-row-sb">
             <p className="post-time mb-1">{moment(info.createdAt).fromNow()}</p>
             <p className="author-name mb-1">
-              - <span> Sanjaya Paudel </span>
+              - <span title={info.author}> {info.author} </span>
             </p>
           </div>
         </div>

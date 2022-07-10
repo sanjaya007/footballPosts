@@ -3,6 +3,7 @@ import {
   getPostsAPI,
   updatePostsAPI,
   deletePostsAPI,
+  likePostsAPI,
 } from "../../api/api";
 
 const addPosts = (value) => async (dispatch) => {
@@ -41,4 +42,14 @@ const deletePosts = (id) => async (dispatch) => {
   }
 };
 
-export { addPosts, getPosts, updatePosts, deletePosts };
+const likePosts = (id) => async (dispatch) => {
+  try {
+    const { data } = await likePostsAPI(id);
+
+    dispatch({ type: "UPDATE_POSTS", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { addPosts, getPosts, updatePosts, deletePosts, likePosts };

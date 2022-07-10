@@ -32,7 +32,13 @@ const FormBox = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (posts) setInputData(posts);
+    if (posts)
+      setInputData({
+        title: posts.title,
+        caption: posts.caption,
+        tags: posts.caption,
+        file: posts.file,
+      });
   }, [posts]);
 
   const handleError = () => {
@@ -57,6 +63,7 @@ const FormBox = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     const trimmedInputData = trimmedBody(inputData);
+    setInputData(trimmedInputData);
 
     for (const keys in trimmedInputData) {
       if (trimmedInputData[keys] === "") {

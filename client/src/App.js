@@ -9,15 +9,15 @@ import Auth from "./components/auth/Auth";
 const App = () => {
   return (
     <>
-      <div className="main-container">
-        <Header />
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="main-container">
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
-        </BrowserRouter>
-      </div>
+        </div>
+      </BrowserRouter>
     </>
   );
 };

@@ -1,13 +1,33 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
-  title: String,
-  caption: String,
-  tags: String,
-  file: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  creator: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+  caption: {
+    type: String,
+    required: true,
+  },
+  tags: {
+    type: String,
+    required: true,
+  },
+  file: {
+    type: String,
+    required: true,
+  },
   likes: {
-    type: Number,
-    default: 0,
+    type: [String],
+    default: [],
   },
   createdAt: {
     type: Date,

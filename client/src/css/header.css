@@ -14,3 +14,41 @@
   font-family: "Potta One", cursive;
   font-size: 1.7rem;
 }
+
+.head-container .profile-data .img-container {
+  min-height: 44px;
+  max-height: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #222f3e6e;
+}
+
+.head-container .profile-data .img-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.head-container .profile-data h5 {
+  font-size: 16px;
+  white-space: nowrap;
+  margin-bottom: 0 !important;
+  margin: 0 20px !important;
+}
+
+.head-container .header-btn {
+  color: #ffffff !important;
+  font-size: 12px;
+}
+
+.head-container .header-btn.signin-btn {
+  background-color: #222f3e !important;
+}
+
+.head-container .header-btn.logout-btn {
+  background-color: #e74c3c;
+}
